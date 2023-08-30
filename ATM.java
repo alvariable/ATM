@@ -41,7 +41,10 @@ public class ATM {
     }
 
     private double depositeMoney(int userID, double amount) {
-        return 0.0;
+        if (exists(userID)) {
+
+        }
+        return -1;
     }
 
     private double withdrawMoney(int userID) {
@@ -59,5 +62,9 @@ public class ATM {
 
     private void audit() {
         // printsaccounts
+    }
+
+    private boolean exists(int userID) {
+        return bankAccounts.containsKey(userID);
     }
 }

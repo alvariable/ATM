@@ -7,7 +7,7 @@ public class Account {
         this.balance = balance;
     }
 
-    private double getBalance() {
+    public double getBalance() {
         return balance;
     }
 
