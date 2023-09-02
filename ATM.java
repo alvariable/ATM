@@ -70,11 +70,29 @@ public class ATM {
     }
 
     public boolean transferMoney(String emailA, String emailB, double balance) {
-        return false;
+        if (balance < 0)
+            return false;
+        // creates hashCode for email
+        int IDa = getUserID(emailA);
+        int IDb = getUserID(emailB);
+        // checks if hashCode key exists
+        if (!bankAccounts.containsKey(IDa) || !bankAccounts.containsKey(IDb))
+            // if either acc !exist(s) -> return false
+            return false;
+        // else -> add balance to account
+        double temp = bankAccounts.get(IDa);
+        temp -= balance;
+        if (temp < 0)
+            return false;
+        bankAccounts.put(IDa, temp);
+        temp = bankAccounts.get(IDb);
+        temp += balance;
+        bankAccounts.put(IDb, temp);
+        return true;
     }
 
-    public String checkBalance(String email) {
-        return null;
+    public double checkBalance(String email) {
+        return 0.0;
     }
 
     public void audit() {
