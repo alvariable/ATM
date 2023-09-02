@@ -35,24 +35,36 @@ public class ATM {
         return email.hashCode();
     }
 
-    void audit() {
-        // printsaccounts
+    public double depositMoney(String email, double balance) {
+        if (balance < 0)
+            return -1.0;
+        // creates hashCode for email
+        int ID = getUserID(email);
+        // checks if hashCode key exists
+        if (!bankAccounts.containsKey(ID))
+            // if !exists -> return false
+            return -1.0;
+        // else -> add balance to account
+        double temp = bankAccounts.get(ID);
+        temp += balance;
+        bankAccounts.put(ID, temp);
+        return balance;
     }
 
-    public double depositMoney(String string, int i) {
+    public double withdrawMoney(String email, double balance) {
         return 0.0;
     }
 
-    public double withdrawMoney(String string, int i) {
-        return 0.0;
-    }
-
-    public boolean transferMoney(String string, String string2, int amount) {
+    public boolean transferMoney(String emailA, String emailB, double balance) {
         return false;
     }
 
-    public String checkBalance(String string) {
+    public String checkBalance(String email) {
         return null;
+    }
+
+    public void audit() {
+        // printsaccounts
     }
 }
 
