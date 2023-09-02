@@ -52,7 +52,21 @@ public class ATM {
     }
 
     public double withdrawMoney(String email, double balance) {
-        return 0.0;
+        if (balance < 0)
+            return -1.0;
+        // creates hashCode for email
+        int ID = getUserID(email);
+        // checks if hashCode key exists
+        if (!bankAccounts.containsKey(ID))
+            // if !exists -> return false
+            return -1.0;
+        // else -> add balance to account
+        double temp = bankAccounts.get(ID);
+        temp -= balance;
+        if (temp < 0)
+            return -1.0;
+        bankAccounts.put(ID, temp);
+        return balance;
     }
 
     public boolean transferMoney(String emailA, String emailB, double balance) {
