@@ -1,4 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Set;
 
 public class ATM {
     // creates a static hashmap that holds the accounts
@@ -92,11 +98,28 @@ public class ATM {
     }
 
     public double checkBalance(String email) {
-        return 0.0;
+        // creates hashCode for email
+        int ID = getUserID(email);
+        // checks if hashCode key exists
+        if (!bankAccounts.containsKey(ID))
+            // if !exists -> return false
+            return -1.0;
+        // else -> return current balance of account
+        return bankAccounts.get(ID);
     }
 
-    public void audit() {
-        // printsaccounts
+    public void audit() throws IOException {
+        FileOutputStream fos = new FileOutputStream(
+                "/Users/ardendoyle/Documents/personal/coding/Honors Topics/ATM/AccountAudit.txt");
+        File file = new File("/Users/ardendoyle/Documents/personal/coding/Honors Topics/ATM/AccountAudit.txt");
+        PrintWriter pw = new PrintWriter(file);
+        Set<Integer> keySet = bankAccounts.keySet();
+        for (Integer k : keySet) {
+            pw.println(k);
+            pw.println(bankAccounts.get(k) + "");
+        }
+        pw.close();
+        fos.close();
     }
 }
 
